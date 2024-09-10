@@ -27,16 +27,19 @@ const options = {
           iziToast.error({
               position: 'topCenter',
               messageColor: 'white',
-              backgroundColor: 'red',
+              backgroundColor: '#ef4040',
               progressBarColor: 'red',
               theme: 'light',
               icon: 'fa-regular fa-circle-xmark fa-beat',
-              iconColor: 'black',
+              iconColor: 'white',
               message: "Please choose a date in the future", });
       }
       else {
           userSelectedDate = selectedDate;
           startBtn.disabled = false;
+          startBtn.style.backgroundColor = "#4e75ff";
+          startBtn.style.color = "#fff";
+          datetimePicker.style.border = "1px solid #4e75ff";
       }
   },
 };
@@ -47,6 +50,10 @@ startBtn.addEventListener("click", () => {
     if (!userSelectedDate) return;
     startBtn.disabled = true;
     datetimePicker.disabled = true;
+    datetimePicker.style.backgroundColor = "#fafafa";
+    datetimePicker.style.border = "1px solid #808080";
+    startBtn.style.backgroundColor = "#cfcfcf";
+    startBtn.style.color = "#989898";
     intervalId = setInterval(() => {
         const currentTime = new Date();
         const timeDifference = userSelectedDate - currentTime;
@@ -54,6 +61,10 @@ startBtn.addEventListener("click", () => {
             clearInterval(intervalId);
             addLeadingZero(0);
             datetimePicker.disabled = false;
+           datetimePicker.style.backgroundColor = "white";
+            datetimePicker.style.border = "1px solid #808080";
+             startBtn.style.backgroundColor = "#cfcfcf";
+    startBtn.style.color = "#989898";
             return;
         }
         addLeadingZero(timeDifference);
