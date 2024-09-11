@@ -17,6 +17,11 @@ form.addEventListener("submit", (event) => {
     const inputR = document.querySelector("input[value='rejected']").checked;
   
     let delay = Number(delayInput.value);
+
+    if (isNaN(delay) || delay <= 0 || (!inputF && !inputR)) {
+        console.log("e");
+       
+    }
     
     const fetchData = ({ value, delay, isSuccess }) => {
         return new Promise((resolve, reject) => {
@@ -44,12 +49,12 @@ form.addEventListener("submit", (event) => {
               backgroundColor: 'lightgreen',
               progressBarColor: 'black',
               theme: 'light',
-            icon: 'fa-solid fa-check',
-            iconColor: "white",
+              icon: 'fa-solid fa-check',
+              iconColor: "white",
               class: "custom-toast",
               message: value, }));
     }
-    
+
     else if (inputR) {
         fetchData({
             value: `Rejected promise in ${delay}ms`,
