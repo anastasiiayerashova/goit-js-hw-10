@@ -65,3 +65,11 @@ body {
   line-height: 150%;
   letter-spacing: 0.03em;
 }
+
+.custom-toast {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.03em;
+  font-family: 'Montserrat', sans-serif;
+}
