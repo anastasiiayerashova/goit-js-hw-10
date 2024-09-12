@@ -16,13 +16,14 @@ const datetimePicker = document.querySelector("#datetime-picker");
 datetimePicker.classList.add('datetime-picker');
 
 const options = {
-    enableTime: true,
-   dateFormat: "Y-m-d H:i",
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {
-      const selectedDate = selectedDates[0];
+enableTime: true,
+dateFormat: "Y-m-d H:i",
+time_24hr: true,
+defaultDate: new Date(),
+minuteIncrement: 1,
+onClose(selectedDates) {
+    const selectedDate = selectedDates[0];
+    
       if (selectedDate <= new Date()) {
           iziToast.error({
               position: 'topCenter',
@@ -34,6 +35,7 @@ const options = {
               iconColor: 'white',
               message: "Please choose a date in the future", });
       }
+
       else {
           userSelectedDate = selectedDate;
           startBtn.disabled = false;
@@ -54,6 +56,7 @@ startBtn.addEventListener("click", () => {
     datetimePicker.style.border = "1px solid #808080";
     startBtn.style.backgroundColor = "#cfcfcf";
     startBtn.style.color = "#989898";
+
     intervalId = setInterval(() => {
         const currentTime = new Date();
         const timeDifference = userSelectedDate - currentTime;
@@ -61,13 +64,15 @@ startBtn.addEventListener("click", () => {
             clearInterval(intervalId);
             addLeadingZero(0);
             datetimePicker.disabled = false;
-           datetimePicker.style.backgroundColor = "white";
+            datetimePicker.style.backgroundColor = "white";
             datetimePicker.style.border = "1px solid #808080";
-             startBtn.style.backgroundColor = "#cfcfcf";
-    startBtn.style.color = "#989898";
+            startBtn.style.backgroundColor = "#cfcfcf";
+            startBtn.style.color = "#989898";
             return;
         }
+
         addLeadingZero(timeDifference);
+        
     }, 1000);
 });
 
@@ -76,7 +81,7 @@ function addLeadingZero(ms) {
     document.querySelector("[data-days]").textContent = days;
     document.querySelector("[data-hours]").textContent = String(hours).padStart(2, '0');
     document.querySelector("[data-minutes]").textContent = String(minutes).padStart(2, '0');
-document.querySelector("[data-seconds]").textContent = String(seconds).padStart(2, '0');
+    document.querySelector("[data-seconds]").textContent = String(seconds).padStart(2, '0');
 }
 
 function convertMs(ms) {
